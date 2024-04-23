@@ -52,6 +52,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/"
                                 ,"/h2-console/**"
+                                ,"/favicon.ico"
                                 ,"/members/signup"
                                 ,"/login"
                         )
