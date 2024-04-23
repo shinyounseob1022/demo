@@ -25,7 +25,6 @@ public class LoginController {
     @PostMapping
     public ResponseEntity<TokenDto> login(@RequestBody LoginDto loginDto) {
 
-        log.info("login controller start");
         String jwt = loginService.login(loginDto);
 
         HttpHeaders httpHeaders = new HttpHeaders();

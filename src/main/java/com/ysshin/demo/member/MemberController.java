@@ -14,12 +14,12 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Map<String, Object>> signup(@RequestBody SignupDto signupDto) {
+    public ResponseEntity<Member> signup(@RequestBody SignupDto signupDto) {
         return ResponseEntity.ok(memberService.signup(signupDto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getMember(@PathVariable Long id) {
+    public ResponseEntity<Member> getMember(@PathVariable Long id) {
         return ResponseEntity.ok(memberService.getMember(id));
     }
 }

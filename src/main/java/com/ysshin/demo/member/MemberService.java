@@ -5,9 +5,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -16,15 +13,12 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Map<String, Object> signup(SignupDto signupDto) {
-
-        Map<String, Object> resultMap = new HashMap<>();
+    public Member signup(SignupDto signupDto) {
 
         Member member = memberRepository.findByEmail(signupDto.getEmail()).orElse(null);
 
         if (member != null) {
-            resultMap.put("회원 가입 실패, 이미 존재하는 이메일입니다.", null);
-            return resultMap;
+            throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
         }
 
         member = Member.builder()
@@ -34,15 +28,12 @@ public class MemberService {
                 .build();
         memberRepository.save(member);
 
-        resultMap.put("회원 가입 성공.", member);
-        return resultMap;
-
+        return member;
     }
 
     public Member getMember(Long id) {
-        return memberRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않는 아이디입니다.")
-        );
+        return memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디입니다."));
     }
 
 }
