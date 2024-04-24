@@ -55,6 +55,8 @@ public class SecurityConfig {
                                 ,"/favicon.ico"
                                 ,"/members/signup"
                                 ,"/login"
+                                ,"/ws/**"
+                                ,"/chats/**"
                         )
                         .permitAll()
                         .anyRequest().authenticated()
