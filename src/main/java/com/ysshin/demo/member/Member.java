@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "member")
+@Table(name = "MEMBER")
 @Getter
 @Builder
 @NoArgsConstructor
@@ -15,17 +15,17 @@ import lombok.NoArgsConstructor;
 public class Member {
 
     @Id @GeneratedValue
-    @Column(name = "member_id")
+    @Column(name = "MEMBER_ID")
     private Long id;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "EMAIL", unique = true)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "PASSWORD")
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "member_role")
+    @Column(name = "MEMBER_ROLE")
     private RoleType role;
 
 }
