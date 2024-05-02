@@ -1,5 +1,6 @@
 package com.ysshin.demo.member;
 
+import com.ysshin.demo.common.TimeStamp;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member {
+public class Member extends TimeStamp {
 
     @Id @GeneratedValue
     @Column(name = "MEMBER_ID")
