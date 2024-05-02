@@ -45,7 +45,7 @@ public class MemberService {
             message = "존재하지 않는 회원입니다.";
             return ResponseDto.fail(message);
         }
-        message = "회원 조회 성공";
+        message = "회원 조회 성공.";
 
         return ResponseDto.success(message, member);
     }
