@@ -1,5 +1,6 @@
 package com.ysshin.demo.member;
 
+import com.ysshin.demo.common.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,15 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Member signup(SignupDto signupDto) {
+    public ResponseDto signup(SignupDto signupDto) {
+
+        String message = "";
 
         Member member = memberRepository.findByEmail(signupDto.getEmail()).orElse(null);
 
         if (member != null) {
-            throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
+            message = "이미 존재하는 이메일입니다.";
+            return ResponseDto.fail(message);
         }
 
         member = Member.builder()
@@ -27,13 +31,23 @@ public class MemberService {
                 .role(RoleType.USER)
                 .build();
         memberRepository.save(member);
+        message = "회원 가입 성공.";
 
-        return member;
+        return ResponseDto.success(message, member);
     }
 
-    public Member getMember(Long id) {
-        return memberRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디입니다."));
+    public ResponseDto getMember(Long id) {
+
+        String message = "";
+        Member member = memberRepository.findById(id).orElse(null);
+
+        if (member == null) {
+            message = "존재하지 않는 회원입니다.";
+            return ResponseDto.fail(message);
+        }
+        message = "회원 조회 성공";
+
+        return ResponseDto.success(message, member);
     }
 
 }

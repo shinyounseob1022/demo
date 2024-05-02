@@ -1,5 +1,6 @@
 package com.ysshin.demo.member;
 
+import com.ysshin.demo.common.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +15,12 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Member> signup(@RequestBody SignupDto signupDto) {
-        return ResponseEntity.ok(memberService.signup(signupDto));
+    public ResponseDto signup(@RequestBody SignupDto signupDto) {
+        return memberService.signup(signupDto);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Member> getMember(@PathVariable Long id) {
-        return ResponseEntity.ok(memberService.getMember(id));
+    public ResponseDto getMember(@PathVariable Long id) {
+        return memberService.getMember(id);
     }
 }
