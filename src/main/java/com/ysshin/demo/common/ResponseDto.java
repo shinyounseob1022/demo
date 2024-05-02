@@ -1,4 +1,4 @@
-package com.ysshin.demo.web;
+package com.ysshin.demo.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
