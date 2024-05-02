@@ -2,7 +2,6 @@ package com.ysshin.demo.member;
 
 import com.ysshin.demo.common.TimeStamp;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,9 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "MEMBER")
 @Getter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class Member extends TimeStamp {
 
     @Id @GeneratedValue
@@ -28,5 +25,12 @@ public class Member extends TimeStamp {
     @Enumerated(EnumType.STRING)
     @Column(name = "MEMBER_ROLE")
     private RoleType role;
+
+    @Builder
+    public Member(String email, String password, RoleType role) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
 }
