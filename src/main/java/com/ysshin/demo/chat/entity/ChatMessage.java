@@ -16,21 +16,21 @@ public class ChatMessage extends TimeStamp {
     @Column(name = "MESSAGE_ID")
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ROOM_ID")
+    private ChatRoom chatRoom;
+
     @Column(name = "SENDER")
     private String sender;
 
     @Column(name = "MESSAGE")
     private String message;
 
-    @ManyToOne
-    @JoinColumn(name = "ROOM_ID")
-    private ChatRoom chatRoom;
-
     @Builder
-    public ChatMessage(String sender, String message, ChatRoom chatRoom) {
+    public ChatMessage(ChatRoom chatRoom, String sender, String message) {
+        this.chatRoom = chatRoom;
         this.sender = sender;
         this.message = message;
-        this.chatRoom = chatRoom;
     }
 
 }
