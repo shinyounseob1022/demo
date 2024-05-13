@@ -27,6 +27,9 @@ public class MemberService {
 
         member = Member.builder()
                 .email(signupDto.getEmail())
+                .name((signupDto.getName()))
+                .birthday(signupDto.getBirthday())
+                .address(signupDto.getAddress())
                 .password(passwordEncoder.encode(signupDto.getPassword()))
                 .role(RoleType.USER)
                 .build();

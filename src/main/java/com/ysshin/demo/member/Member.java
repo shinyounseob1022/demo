@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "MEMBER")
 @Getter
@@ -19,6 +22,15 @@ public class Member extends TimeStamp {
     @Column(name = "EMAIL", unique = true)
     private String email;
 
+    @Column(name = "MEMBER_NAME")
+    private String name;
+
+    @Column(name = "BIRTHDAY")
+    private LocalDate birthday;
+
+    @Column(name = "ADDRESS")
+    private String address;
+
     @Column(name = "PASSWORD")
     private String password;
 
@@ -27,8 +39,12 @@ public class Member extends TimeStamp {
     private RoleType role;
 
     @Builder
-    public Member(String email, String password, RoleType role) {
+    public Member(String email, String name, LocalDate birthday,
+                  String address, String password, RoleType role) {
         this.email = email;
+        this.name = name;
+        this.birthday = birthday;
+        this.address = address;
         this.password = password;
         this.role = role;
     }
