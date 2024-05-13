@@ -55,6 +55,8 @@ public class SecurityConfig {
                                 ,"/favicon.ico"
                                 ,"/members/signup"
                                 ,"/login"
+                                ,"/page/login"
+                                ,"/page/signup"
                                 ,"/ws/**"
                                 ,"/chats/**"
                         )

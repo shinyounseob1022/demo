@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+</head>
+<body>
+
+<div>
+    <h2>회원가입</h2>
+    <input type="text" class="email" placeholder="이메일"><br>
+    <input type="text" class="name" placeholder="이름"><br>
+    <span style="color: grey; font-size: small;">생년월일&nbsp;</span>
+    <input type="date" class="birthday"><br>
+    <input type="text" class="address" placeholder="주소"><br>
+    <input type="password" class="password" placeholder="비밀번호"><br>
+    <input type="password" class="verified-password" placeholder="비밀번호 확인">
+    <button class="signup">회원가입</button><br><br>
+    <a href="/page/login">로그인</a>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+    // 회원가입
+    $(".signup").on("click", function() {
+        let email = $(".email").val();
+        let name = $(".name").val();
+        let birthday = $(".birthday").val();
+        let address = $(".address").val();
+        let password = $(".password").val();
+        let verifiedPassword = $(".verified-password").val();
+
+        let data = {
+            "email" : email,
+            "name" : name,
+            "birthday" : birthday,
+            "address" : address,
+            "password" : password,
+            "verifiedPassword" : verifiedPassword
+        };
+
+        $.ajax({
+            type : "post",
+            url : "/members/signup",
+            headers : {"Content-Type" : "application/json"},
+            data : JSON.stringify(data),
+            success : function(result) {
+                console.log(result);
+                alert(result.message);
+                if (result.status === "success") {
+                    location.href = "/page/login";
+                }
+            },
+            error : function(request, status, error) {
+                console.log(error);
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
