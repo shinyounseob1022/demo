@@ -12,7 +12,7 @@
     <input type="text" class="name" placeholder="이름"><br>
     <span style="color: grey; font-size: small;">생년월일&nbsp;</span>
     <input type="date" class="birthday"><br>
-    <input type="text" class="address" placeholder="이메일"><br>
+    <input type="text" class="address" placeholder="주소"><br>
     <input type="password" class="password" placeholder="비밀번호"><br>
     <input type="password" class="verified-password" placeholder="비밀번호 확인">
     <button class="signup">회원가입</button><br><br>
@@ -48,7 +48,9 @@
             success : function(result) {
                 console.log(result);
                 alert(result.message);
-                location.href = "/page/login";
+                if (result.status === "success") {
+                    location.href = "/page/login";
+                }
             },
             error : function(request, status, error) {
                 console.log(error);
