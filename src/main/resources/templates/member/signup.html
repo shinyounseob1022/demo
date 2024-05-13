@@ -13,13 +13,23 @@
     <input type="date" class="birthday"><br>
     <input type="text" class="address" placeholder="이메일"><br>
     <input type="password" class="password" placeholder="비밀번호"><br>
-    <input type="password" class="password" placeholder="비밀번호 확인">
+    <input type="password" class="verified-password" placeholder="비밀번호 확인">
     <button class="signup">회원가입</button><br><br>
     <a href="/page/login">로그인</a>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+    // 회원가입
+    $(".signup").on("click", function() {
+        let email = $(".email").val();
+        let name = $(".name").val();
+        let birthday = $(".birthday").val();
+        let address = $(".address").val();
+        let password = $(".password").val();
+        let verifiedPassword = $(".verified-password").val();
 
+
+    });
 </script>
 </body>
 </html>
