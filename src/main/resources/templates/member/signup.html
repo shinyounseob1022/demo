@@ -5,6 +5,7 @@
     <title>회원가입</title>
 </head>
 <body>
+
 <div>
     <h2>회원가입</h2>
     <input type="text" class="email" placeholder="이메일"><br>
@@ -17,8 +18,10 @@
     <button class="signup">회원가입</button><br><br>
     <a href="/page/login">로그인</a>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+
     // 회원가입
     $(".signup").on("click", function() {
         let email = $(".email").val();
@@ -28,8 +31,31 @@
         let password = $(".password").val();
         let verifiedPassword = $(".verified-password").val();
 
+        let data = {
+            "email" : email,
+            "name" : name,
+            "birthday" : birthday,
+            "address" : address,
+            "password" : password,
+            "verifiedPassword" : verifiedPassword
+        };
 
+        $.ajax({
+            type : "post",
+            url : "/members/signup",
+            headers : {"Content-Type" : "application/json"},
+            data : JSON.stringify(data),
+            success : function(result) {
+                console.log(result);
+                alert(result.message);
+                location.href = "/page/login";
+            },
+            error : function(request, status, error) {
+                console.log(error);
+            }
+        });
     });
+
 </script>
 </body>
 </html>
