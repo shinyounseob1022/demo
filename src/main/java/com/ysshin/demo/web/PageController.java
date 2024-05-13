@@ -18,4 +18,9 @@ public class PageController {
         return "/member/signup";
     }
 
+    @GetMapping("/room-list")
+    public String chatList() {
+        return "/chat/room_list";
+    }
+
 }
