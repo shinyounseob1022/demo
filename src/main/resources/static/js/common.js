@@ -45,3 +45,18 @@ function appendLoginUserHtml(email) {
         $(".username").append(html);
     }
 }
+
+function checkLogin(url) {
+    console.log(url);
+    $.ajax({
+        type : "get",
+        url : url,
+        headers : {"Content-Type" : "application/json"},
+        success : function(result) {
+
+        },
+        error : function(request, status, error) {
+            console.log(error);
+        }
+    });
+}
