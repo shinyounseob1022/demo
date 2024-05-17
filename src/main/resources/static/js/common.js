@@ -14,10 +14,9 @@ function setLoginUserInfo() {
 
 // 로컬스토리지의 토큰을 디코딩하여 이메일을 추출
 function getUserEmail() {
-    const token = localStorage.getItem('token')?.replace('Bearer ', '');
-
+    const token = localStorage.getItem('token');
     if (token === "" || token === undefined || token === null) {
-        return null;
+        return;
     }
 
     const base64Payload = token.split('.')[1];
@@ -46,14 +45,19 @@ function appendLoginUserHtml(email) {
     }
 }
 
-function checkLogin(url) {
-    console.log(url);
+function pageRequest(url) {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    if (token === "" || token === undefined || token === null) {
+        alert("로그인이 필요합니다.");
+        return;
+    }
     $.ajax({
         type : "get",
         url : url,
-        headers : {"Content-Type" : "application/json"},
+        headers : {"Authorization" : `Bearer ${token}`},
         success : function(result) {
-
+            console.log(result);
         },
         error : function(request, status, error) {
             console.log(error);

@@ -64,10 +64,10 @@ public class SecurityConfig {
                         .requestMatchers("/"
                                 ,"/h2-console/**"
                                 ,"/favicon.ico"
+                                ,"/page/signup"
+                                ,"/page/login"
                                 ,"/members/signup"
                                 ,"/login"
-                                ,"/page/login"
-                                ,"/page/signup"
                                 ,"/ws/**"
                                 ,"/chats/**"
                         )
