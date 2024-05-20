@@ -5,63 +5,24 @@
     <title>홈</title>
 </head>
 <body>
+
 <div>
     <h2>홈</h2>
     <p class="username"></p>
     <ul>
         <li><a href="/page/login">로그인</a></li>
         <li><a href="/page/signup">회원가입</a></li>
+        <li><a href="/page/room-list">채팅방 목록</a></li>
     </ul>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="/js/common.js"></script>
 <script>
+
     $(document).ready(function() {
-        const email = getUserEmail();
-        appendCurrentUserHtml(email);
-
-        $(".logout").on("click", function() {
-            if (confirm("로그아웃 하시겠습니까?")) {
-                localStorage.removeItem("token");
-                location.reload();
-            }
-        });
+        setLoginUserInfo();
     });
-
-    // 로컬스토리지의 토큰을 디코딩하여 이메일을 추출
-    function getUserEmail() {
-        const token = localStorage.getItem('token')?.replace('Bearer ', '');
-
-        if (token === "" || token === undefined || token === null) {
-            return null;
-        }
-
-        const base64Payload = token.split('.')[1];
-        const base64 = base64Payload.replace(/-/g, '+').replace(/_/g, '/');
-        const decodedJWT = JSON.parse(
-              decodeURIComponent(
-                window
-                  .atob(base64)
-                  .split('')
-                  .map(function (c) {
-                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-                  })
-                  .join('')
-            )
-        );
-
-        return decodedJWT.sub;
-    }
-
-    // 로그인된 사용자 및 로그아웃 버튼 표시
-    function appendCurrentUserHtml(email) {
-        $(".username").empty();
-        if (email != "" && email != undefined && email != null ) {
-            let html = `<spa>${email}님 안녕하세요.&nbsp;</span><button class="logout">로그아웃</button>`;
-            $(".username").append(html);
-        }
-    }
-
-
 
 </script>
 </body>
