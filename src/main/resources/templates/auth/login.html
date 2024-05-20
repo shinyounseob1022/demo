@@ -18,35 +18,7 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
+<script src="/js/auth/login.js"></script>
 
-    // 로그인
-    $(".login").on("click", function() {
-        let email = $(".email").val();
-        let password = $(".password").val();
-
-        let data = {
-            "email" : email,
-            "password" : password
-        };
-
-        // jwt 발급
-        $.ajax({
-            type : "post",
-            url : "/login",
-            headers : {"Content-Type" : "application/json"},
-            data : JSON.stringify(data),
-            success : function(result) {
-                localStorage.setItem("token", result.token);
-                alert("로그인 성공.");
-                location.href = "/";
-            },
-            error : function(request, status, error) {
-                console.log(error);
-            }
-        });
-    });
-
-</script>
 </body>
 </html>
