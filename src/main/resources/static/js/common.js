@@ -45,22 +45,11 @@ function appendLoginUserHtml(email) {
     }
 }
 
-function pageRequest(url) {
-    const token = localStorage.getItem("token");
-    console.log(token);
+// 로그인 검증
+function validateLogin() {
+    const token = localStorage.getItem('token');
     if (token === "" || token === undefined || token === null) {
-        alert("로그인이 필요합니다.");
-        return;
+        alert("로그인이 필요합니다. 로그인 후 다시 시도해 주세요.");
+        history.back();
     }
-    $.ajax({
-        type : "get",
-        url : url,
-        headers : {"Authorization" : `Bearer ${token}`},
-        success : function(result) {
-            console.log(result);
-        },
-        error : function(request, status, error) {
-            console.log(error);
-        }
-    });
 }

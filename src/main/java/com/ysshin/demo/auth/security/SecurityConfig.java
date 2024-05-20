@@ -34,7 +34,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public WebSecurityCustomizer webSecurityCustomizer(){
+    public WebSecurityCustomizer webSecurityCustomizer(){ // 정적 리소스 접근 허용
         return web -> web.ignoring()
                 .requestMatchers(PathRequest
                         .toStaticResources()
@@ -64,8 +64,7 @@ public class SecurityConfig {
                         .requestMatchers("/"
                                 ,"/h2-console/**"
                                 ,"/favicon.ico"
-                                ,"/page/signup"
-                                ,"/page/login"
+                                ,"/page/**"
                                 ,"/members/signup"
                                 ,"/login"
                                 ,"/ws/**"

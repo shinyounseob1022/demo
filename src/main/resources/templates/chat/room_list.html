@@ -6,6 +6,9 @@
 </head>
 <body>
 <div>
+    <a href="/">홈</a>
+    <h2>채팅방 목록</h2>
+    <p class="username"></p>
     <div>
         <input type="text" class="room-name" placeholder="채팅방 이름">
         <button class="create-room">채팅방 만들기</button>
@@ -20,6 +23,7 @@
 <script src="/js/common.js"></script>
 <script>
     $(document).ready(function() {
+        validateLogin();
         setLoginUserInfo();
         getRoomList();
     });

@@ -20,7 +20,7 @@ public class PageController {
 
     @GetMapping("/room-list")
     public String chatList() {
-        return "redirect:/chat/room_list";
+        return "/chat/room_list";
     }
 
 }
