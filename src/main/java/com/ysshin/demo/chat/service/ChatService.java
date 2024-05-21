@@ -1,10 +1,15 @@
 package com.ysshin.demo.chat.service;
 
+import com.ysshin.demo.chat.dto.ChatRoomDto;
 import com.ysshin.demo.chat.entity.ChatMessage;
 import com.ysshin.demo.chat.entity.ChatRoom;
 import com.ysshin.demo.chat.repository.ChatMessageRepository;
+import com.ysshin.demo.chat.repository.ChatRoomMemberRepository;
 import com.ysshin.demo.chat.repository.ChatRoomRepository;
 import com.ysshin.demo.common.ResponseDto;
+import com.ysshin.demo.member.Member;
+import com.ysshin.demo.chat.entity.ChatRoomMember;
+import com.ysshin.demo.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,20 +21,32 @@ public class ChatService {
 
     private final ChatRoomRepository chatRoomRepository;
     private final ChatMessageRepository chatMessageRepository;
+    private final ChatRoomMemberRepository chatRoomMemberRepository;
+    private final MemberRepository memberRepository;
 
-    public void saveTestChatRooms() {
-        ChatRoom chatRoom1 = ChatRoom.builder()
-                .roomName("chatRoom1")
+    public ResponseDto createChatRoom(ChatRoomDto chatRoomDto) {
+
+        String message = "";
+        String email = chatRoomDto.getEmail();
+        String roomName = chatRoomDto.getRoomName();
+
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 이메일입니다"));
+
+        ChatRoom chatRoom = ChatRoom.builder()
+                .roomName(roomName)
                 .build();
-        ChatRoom chatRoom2 = ChatRoom.builder()
-                .roomName("chatRoom2")
+        chatRoomRepository.save(chatRoom);
+
+        ChatRoomMember chatRoomMember = ChatRoomMember.builder()
+                .chatRoom(chatRoom)
+                .member(member)
                 .build();
-        ChatRoom chatRoom3 = ChatRoom.builder()
-                .roomName("chatRoom3")
-                .build();
-        chatRoomRepository.save(chatRoom1);
-        chatRoomRepository.save(chatRoom2);
-        chatRoomRepository.save(chatRoom3);
+        chatRoomMemberRepository.save(chatRoomMember);
+
+        message = "채팅방 생성 성공.";
+
+        return ResponseDto.success(message, chatRoom);
     }
 
     public ChatMessage saveChatMessage(Long roomId, String sender, String message) {

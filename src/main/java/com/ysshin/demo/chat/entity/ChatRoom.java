@@ -29,10 +29,4 @@ public class ChatRoom extends TimeStamp {
         this.roomName = roomName;
     }
 
-    public static ChatRoom createChatRoom(String roomName) {
-        return ChatRoom.builder()
-                .roomName(roomName)
-                .build();
-    }
-
 }
