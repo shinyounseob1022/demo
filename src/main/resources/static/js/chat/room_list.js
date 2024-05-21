@@ -24,7 +24,8 @@ $(".create-room").on("click", function() {
         },
         data : JSON.stringify(data),
         success : function(result) {
-            console.log(result)
+            console.log(result);
+            getRoomList();
         },
         error : function(request, status, error) {
             console.log(error);
@@ -48,7 +49,7 @@ function getRoomList() {
             }
             roomList.forEach((room) => {
                 console.log(room);
-                html += `<li>${room.roomName}</li>`;
+                html += `<li><a href="/page/room/${room.id}">${room.roomName}</a></li>`;
             });
             $(".room-list").empty();
             $(".room-list").append(html);
