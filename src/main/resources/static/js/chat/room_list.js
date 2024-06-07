@@ -49,7 +49,8 @@ function getRoomList() {
             }
             roomList.forEach((room) => {
                 console.log(room);
-                html += `<li><a href="/page/room/${room.id}">${room.roomName}</a></li>`;
+                //html += `<li><a href="/page/room/${room.id}">${room.roomName}</a></li>`;
+                html += `<li><a href="javascript:void(0);" onclick="goRoom(${room.id});">${room.roomName}</a></li>`;
             });
             $(".room-list").empty();
             $(".room-list").append(html);
@@ -58,4 +59,10 @@ function getRoomList() {
             console.log(error)
         }
     });
+}
+
+function goRoom(roomId) {
+    localStorage.setItem("roomId", roomId);
+    alert(localStorage.getItem("roomId"));
+    location.href = `/page/room/${roomId}`;
 }
