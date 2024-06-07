@@ -22,6 +22,7 @@ $(".login").on("click", function() {
         },
         error : function(request, status, error) {
             console.log(error);
+            alert("로그인 실패. 계정 정보가 올바르지 않습니다. 다시 입력해 주세요.");
         }
     });
 });

@@ -26,8 +26,7 @@ public class PageController {
     }
 
     @GetMapping("/room/{id}")
-    public String chatRoom(@PathVariable("id") String id, Model model) {
-        model.addAttribute("roomId", id);
+    public String chatRoom(@PathVariable("id") String id) {
         return "/chat/room";
     }
 
